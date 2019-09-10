@@ -3,7 +3,7 @@ services:
   myapp-frontend:
     build:
       context: ./frontend
-    image: ssatawkar/myapp-frontend:1.0
+    image: ssatawkar/mycart-frontend:2.0
     depends_on: 
       - myapp-backend
     environment:
@@ -14,36 +14,21 @@ services:
       - type: volume
         source: myapp-frontend-logvol
         target: /var/log
-  myapp-frontend-logs:
-    build:
-      context: ./awslogs
-    image: ssatawkar/mmyapp-frontend-logs:1.0
-    depends_on: 
-      - myapp-frontend
-    volumes:
-      - type: volume
-        source: myapp-frontend-logvol
-        target: /mnt/log
-        read_only: true
   myapp-backend:
     build:
       context: ./backend
-    image: ssatawkar/mmyapp-backend:1.0
+    image: ssatawkar/mycart-backend:2.0
     volumes:
       - type: volume
         source: myapp-backend-logvol
         target: /var/log
-  myapp-backend-logs:
-    build:
-      context: ./awslogs
-    image: ssatawkar/mmyapp-backend-logs:1.0
-    depends_on: 
-      - myapp-backend
+  myapp-db:
+    image: mysql:5.7
     volumes:
       - type: volume
-        source: myapp-backend-logvol
-        target: /mnt/log
-        read_only: true
+        source: myapp-db-volume
+        target: /vat/lib/mysql
 volumes:
-  myapp-frontend-logvol:
-  myapp-backend-logvol:
+    myapp-frontend-logvol:
+    myapp-backend-logvol:
+    myapp-db-volume:

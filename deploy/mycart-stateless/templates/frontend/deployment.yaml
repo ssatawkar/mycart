@@ -1,13 +1,13 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: myacart-frontend
-  namespace: mycart
+  name: {{ .Values.names.msname  }}-{{ .Values.names.fename }}
+  namespace: {{ .Values.nsnames }}
 spec:
   selector:
     matchLabels:
       app: myapp
-      tier: frontend
+      tier: {{ .Values.names.fename }}
   replicas: 2
   minReadySeconds: 5
   progressDeadlineSeconds: 300

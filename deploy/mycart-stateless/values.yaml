@@ -1,0 +1,6 @@
+---
+ nsnames: mycart 
+ names:
+    msname: myacart
+    fename: frontend
+    bename: backend
